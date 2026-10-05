@@ -1,7 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { getSheetData } from './helper/getSheetData';
+
+const SHEET_ID ='1oSCUXEqqMAtAPYxDP-WLAjnG9h2wk1wDlrGjBFFYGJI';
+const SHEET_NAME = 'Sheet2';
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+
+
+useEffect(() => {
+
+  getSheetData(SHEET_ID, SHEET_NAME).then(result => {
+    // console.log('result', result);
+  });
+
+}, []);
+
+
 
   return (
     <>
