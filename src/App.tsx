@@ -23,6 +23,18 @@ function App() {
                     ))}
                 </tr>
             </thead>
+            <tbody>
+                {tableState?.rows?.map((rowItem: any, index: number)=> {
+                    console.log('rowItem', rowItem);
+                    return <tr key={index}>
+                        {rowItem?.c?.map((rowCell: any, index: any)=> {
+                            console.log("rowCell: ", rowCell);
+                            return <td key={index + rowCell?.v}>{rowCell?.f ?? rowCell?.v}</td>
+                            
+                        })}
+                    </tr>
+                })}
+            </tbody>
         </table>
     );
 }
