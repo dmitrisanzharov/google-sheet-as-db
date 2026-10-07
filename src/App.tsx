@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSheetData } from './helper/getSheetData';
+import { postSheetData } from './helper/postSheetData';
+import type { SheetRow } from './helper/postSheetData';
 
 const SHEET_ID = '1oSCUXEqqMAtAPYxDP-WLAjnG9h2wk1wDlrGjBFFYGJI';
 const SHEET_NAME = 'Sheet2';
@@ -14,28 +16,52 @@ function App() {
         });
     }, []);
 
+
+    function postNewData(){
+
+        const dataObj: SheetRow = {
+            id: Math.random(),
+            name: 'Sarah',
+            second: 'Conor'
+        }
+
+
+        postSheetData(dataObj).then(result => {
+            console.log("result: ", result);
+
+        })
+
+    }
+
+
+
     return (
-        <table>
-            <thead>
-                <tr>
-                    {tableState?.cols?.map((item: any) => (
-                        <th key={item.id}>{item.label}</th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {tableState?.rows?.map((rowItem: any, index: number)=> {
-                    console.log('rowItem', rowItem);
-                    return <tr key={index}>
-                        {rowItem?.c?.map((rowCell: any, index: any)=> {
-                            console.log("rowCell: ", rowCell);
-                            return <td key={index + rowCell?.v}>{rowCell?.f ?? rowCell?.v}</td>
-                            
-                        })}
+        <>
+        <button onClick={postNewData}>post data</button>
+        <hr />
+            <table>
+                <thead>
+                    <tr>
+                        {tableState?.cols?.map((item: any) => (
+                            <th key={item.id}>{item.label}</th>
+                        ))}
                     </tr>
-                })}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {tableState?.rows?.map((rowItem: any, index: number) => {
+                        console.log('rowItem', rowItem);
+                        return (
+                            <tr key={index}>
+                                {rowItem?.c?.map((rowCell: any, index: any) => {
+                                    console.log('rowCell: ', rowCell);
+                                    return <td key={index + rowCell?.v}>{rowCell?.f ?? rowCell?.v}</td>;
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </>
     );
 }
 
