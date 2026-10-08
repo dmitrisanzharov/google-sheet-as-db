@@ -4,7 +4,7 @@ import { postSheetData } from './helper/postSheetData';
 import type { SheetRow } from './helper/postSheetData';
 
 const SHEET_ID = '1oSCUXEqqMAtAPYxDP-WLAjnG9h2wk1wDlrGjBFFYGJI';
-const SHEET_NAME = 'Sheet2';
+const SHEET_NAME = 'Sheet1';
 
 function App() {
     const [tableState, setTableState] = useState<any | null>({});
