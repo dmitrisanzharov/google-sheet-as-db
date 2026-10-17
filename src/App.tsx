@@ -6,7 +6,7 @@ const sheetName = '';
 const baseUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq`;
 // const baseQuery = `?sheet=${encodeURIComponent(sheetName)}`
 
-const useGetData = async () => {
+const useGetData = () => {
 
   console.log('re-rendered');
 
