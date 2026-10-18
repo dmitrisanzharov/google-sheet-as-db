@@ -29,35 +29,40 @@ const useGetData = () => {
     return data;
 };
 
+const postScriptUrl = 'AKfycbxUjSDRAzihqi6iAOypSj0WtJ0kwmsGWgcUBEvVk5uTsMIdot8VLuK1snsv_lkNXeWf';
+
 function App() {
     const tableData = useGetData();
     console.log('tableData: ', tableData);
 
-    async function handlePost(){
-        const postUrl = 'https://script.google.com/macros/s/AKfycbzOdsIDkyz4zQIqMGw0iDS25aAyR632daews1mZfHR97T4GfKmmtzx9Fe9ilVyo_Flp/exec';
-        let postResponse = await fetch(postUrl);
-        console.log("postResponse: ", postResponse);
-        
+    async function handlePost() {
+        console.log('button clicked');
+        const url =
+            'https://script.google.com/macros/s/AKfycbykyjHKLbsiRXGr47V4ArKhQGvn1CJ66ayf9bg5HauoQam9hVO0PT5aQXMP0_-SVbWw/exec';
+
+        fetch(url, {
+            method: 'POST'
+        });
     }
 
     return (
         <>
-        <button onClick={handlePost}>POST</button>
-        <hr />
+            <button onClick={handlePost}>POST</button>
+            <hr />
             <table>
                 <thead>
                     <tr>
                         {tableData?.cols?.map((col: any) => {
-                            return <th key={col?.id}>{col?.label}</th>;
+                            return <th key={Math.random()}>{col?.label}</th>;
                         })}
                     </tr>
                 </thead>
                 <tbody>
                     {tableData?.rows?.map((row: any, i: number) => {
                         return (
-                            <tr key={i}>
+                            <tr key={Math.random() + 'b'}>
                                 {row?.c?.map((cell: any) => {
-                                    return <td key={cell?.v}>{cell?.f ?? cell?.v}</td>;
+                                    return <td key={Math.random() + 'a'}>{cell?.f ?? cell?.v}</td>;
                                 })}
                             </tr>
                         );
