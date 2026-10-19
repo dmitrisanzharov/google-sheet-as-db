@@ -6,20 +6,28 @@ const sheetId = '1YUgFc_TNMsN__ZV6rqFOeCnTyF8jGW0oBeKBqFjWXPM';
 const baseUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq`;
 // const baseQuery = `?sheet=${encodeURIComponent(sheetName)}`;
 
+const rangeUrl = '?range=B2';
+
+const tableQuery = encodeURIComponent('SELECT A WHERE A = 2')
+
+
+let finalUrl = baseUrl + tableQuery;
+console.log("finalUrl: ", finalUrl);
+
 const useGetData = () => {
     const [data, setData] = useState<any>({});
 
     useEffect(() => {
         async function triggerFetch() {
-            const response = await fetch(baseUrl);
-            // console.log('fetch response: ', response);
+            const response = await fetch(finalUrl);
+            console.log('fetch response: ', response);
 
             const text = await response.text();
-            // console.log('text: ', text);
+            console.log('text: ', text);
 
             const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\((.*)\);/)![1]);
 
-            // console.log('json', json);
+            console.log('json', json);
             setData(json.table);
         }
 
@@ -51,7 +59,7 @@ function App() {
         console.log('handleHelloWorld clicked');
         fetch(url, {
             method: 'POST',
-            body: 'hello world from frontend'
+            body: JSON.stringify({ hello: 'world', foo: 'foo', bar: 'bar'})
         })
             .then((r) => r.text())
             .then((d) => console.log(JSON.parse(d)));
