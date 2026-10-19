@@ -12,14 +12,14 @@ const useGetData = () => {
     useEffect(() => {
         async function triggerFetch() {
             const response = await fetch(baseUrl);
-            console.log('fetch response: ', response);
+            // console.log('fetch response: ', response);
 
             const text = await response.text();
-            console.log('text: ', text);
+            // console.log('text: ', text);
 
             const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\((.*)\);/)![1]);
 
-            console.log('json', json);
+            // console.log('json', json);
             setData(json.table);
         }
 
@@ -29,24 +29,38 @@ const useGetData = () => {
     return data;
 };
 
-const postScriptUrl = 'AKfycbxUjSDRAzihqi6iAOypSj0WtJ0kwmsGWgcUBEvVk5uTsMIdot8VLuK1snsv_lkNXeWf';
+const url =
+    'https://script.google.com/macros/s/AKfycbww15KiRCg1rka57IR1JX6GzG8UhYqAgPPvaqXJjZVvygsraBv1FXB-cKG6DeOgEuG-/exec';
 
 function App() {
     const tableData = useGetData();
-    console.log('tableData: ', tableData);
+    // console.log('tableData: ', tableData);
 
     async function handlePost() {
         console.log('button clicked');
-        const url =
-            'https://script.google.com/macros/s/AKfycbykyjHKLbsiRXGr47V4ArKhQGvn1CJ66ayf9bg5HauoQam9hVO0PT5aQXMP0_-SVbWw/exec';
 
         fetch(url, {
-            method: 'POST'
-        });
+            method: 'POST',
+            body: JSON.stringify({ foo: 'foo str' })
+        })
+            .then((r) => r.text())
+            .then((d) => console.log(JSON.parse(d)));
+    }
+
+    async function handleHelloWorld() {
+        console.log('handleHelloWorld clicked');
+        fetch(url, {
+            method: 'POST',
+            body: 'hello world from frontend'
+        })
+            .then((r) => r.text())
+            .then((d) => console.log(JSON.parse(d)));
     }
 
     return (
         <>
+            <button onClick={handleHelloWorld}>hello world turn around</button>
+            <hr />
             <button onClick={handlePost}>POST</button>
             <hr />
             <table>
