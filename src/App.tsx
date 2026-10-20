@@ -8,7 +8,7 @@ const baseUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq`;
 
 const rangeUrl = '?range=B2';
 
-const tableQuery = encodeURIComponent('SELECT A WHERE A = 2')
+const tableQuery = encodeURIComponent('SELECT A WHERE A = 2') /// NOT WORKING... 
 
 
 let finalUrl = baseUrl + tableQuery;
