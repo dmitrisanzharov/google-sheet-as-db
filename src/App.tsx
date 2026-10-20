@@ -8,8 +8,12 @@ const baseUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq`;
 
 const rangeUrl = '?range=B2';
 
-const tableQuery = encodeURIComponent('SELECT A WHERE A = 2') /// NOT WORKING... 
+const gVizQuery = '?' + new URLSearchParams({
+    // range: 'B1:D6',
+    tq: 'WHERE A = 1'
+})
 
+const tableQuery = gVizQuery; /// NOT WORKING... 
 
 let finalUrl = baseUrl + tableQuery;
 console.log("finalUrl: ", finalUrl);
@@ -42,7 +46,7 @@ const url =
 
 function App() {
     const tableData = useGetData();
-    // console.log('tableData: ', tableData);
+    console.log('tableData: ', tableData);
 
     async function handlePost() {
         console.log('button clicked');
