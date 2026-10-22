@@ -73,7 +73,7 @@ function App() {
         <>
             <button onClick={handleHelloWorld}>hello world turn around</button>
             <hr />
-            <button onClick={handlePost}>POST</button>
+            <button onClick={handlePost}>POST and SEND</button>
             <hr />
             <table>
                 <thead>
